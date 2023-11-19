@@ -57,5 +57,13 @@ namespace TestEcheancier.Services
 			}
 			return arguments;
 		}
+		  public Arguments Treat(string text)
+		{
+			if(string.IsNullOrEmpty(text)) throw new NotImplementedException();
+			var res= Process(text.Split(" "));
+			if (res.NBEcheance <= 0 && res.DateFin != null) res.NBEcheance=((-res.DateDebut.Month+res.DateFin.Value.Month)/res.Periodicite) + (res.DateDebut.Day < res.DateFin.Value.Day ? 1 : 0);
+		    return res;
+		
+		}
 	}
 }
